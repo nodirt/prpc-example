@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -24,6 +25,8 @@ func init() {
 	discovery.Enable(&server)
 	server.InstallHandlers(router, base)
 
+	router.GET("/", index)
+
 	// Plug the router into std HTTP stack.
 	http.DefaultServeMux.Handle("/", router)
 }
@@ -35,4 +38,21 @@ func base(h middleware.Handler) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		h(context.Background(), w, r, p)
 	}
+}
+
+var indexPage = `<html>
+<head><title>Helloworld</title></head>
+<body>
+
+Use <code>rpc</code> tool to talk to this server,
+as described in
+<a href="http://nodir.io/post/138899670556/prpc">pPRC blog post</a>.
+
+</body>
+</html>
+`
+
+func index(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	w.Header().Set("Content-Type", "text/html")
+	fmt.Fprintln(w, indexPage)
 }
