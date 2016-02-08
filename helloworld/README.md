@@ -15,4 +15,4 @@ You can use `rpc` tool to discovery and call it:
     # Make RPC
     rpc call prpc-helloworld.appspot.com helloworld.Greeter.SayHello -name $USER
     
-Read the full article at nodir.io/123/prpc.
+Read the full article at http://nodir.io/post/138899670556/prpc.
