@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/luci/luci-go/server/auth"
 	"github.com/luci/luci-go/server/discovery"
 	"github.com/luci/luci-go/server/middleware"
 	"github.com/luci/luci-go/server/prpc"
@@ -20,7 +21,7 @@ func init() {
 
 	// Configure pRPC server.
 	var server prpc.Server
-	server.CustomAuthenticator = true // omit authentication.
+	server.Authenticator = auth.Authenticator{} // omit authentication.
 	helloworld.RegisterGreeterServer(&server, &greeterService{})
 	discovery.Enable(&server)
 	server.InstallHandlers(router, base)
