@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/luci/luci-go/common/prpc"
+	"github.com/luci/luci-go/grpc/prpc"
 	"golang.org/x/net/context"
 
 	"github.com/nodirt/prpc-example/helloworld/proto"
